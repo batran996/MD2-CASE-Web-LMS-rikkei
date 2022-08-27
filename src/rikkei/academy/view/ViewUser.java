@@ -2,7 +2,6 @@ package rikkei.academy.view;
 
 import rikkei.academy.config.Config;
 import rikkei.academy.controller.UserController;
-import rikkei.academy.model.KhoaHoc;
 import rikkei.academy.model.User;
 
 import java.util.ArrayList;
@@ -11,13 +10,18 @@ import java.util.Locale;
 public class ViewUser {
     UserController userController = new UserController();
 
-    public void formUserManager() {
+    public void fromUserManager() {
         System.out.println("Menu User");
         System.out.println("0:Exit");
         System.out.println("1:list user");
         System.out.println("2:delete user");
         System.out.println("3:search user");
-        int choice = Integer.parseInt(Config.scanner().nextLine());
+        int choice = -1;
+        try {
+            choice = Integer.parseInt(Config.scanner().nextLine());
+        }catch (Exception e){
+            fromUserManager();
+        }
         switch (choice) {
             case 0:
                 return;
@@ -34,7 +38,7 @@ public class ViewUser {
             default:
                 System.err.println("Invalid choice!");
         }
-        formUserManager();
+        fromUserManager();
     }
 
     private void fromSearchUser() {

@@ -7,7 +7,7 @@ import rikkei.academy.model.KhoaHoc;
 import java.util.List;
 import java.util.Locale;
 
-public class ViewKhoahoc {
+public class ViewKhoahocUser {
     KhoaHocController khoaHocController = new KhoaHocController();
     List<KhoaHoc> khoaHocControllerList = khoaHocController.getListKhoaHoc();
     List<KhoaHoc> khoaHocYeuThichController = khoaHocController.getListYeuThich();
@@ -19,7 +19,12 @@ public class ViewKhoahoc {
         System.out.println("2: Tìm kiếm khóa học");
         System.out.println("3: Khóa học yêu thích");
         System.out.println("4: thêm Khóa học yêu thích");
-        int choice = Integer.parseInt(Config.scanner().nextLine());
+        int choice = -1;
+        try {
+            choice = Integer.parseInt(Config.scanner().nextLine());
+        }catch (Exception e){
+            menuKhoaHoc();
+        }
         switch (choice) {
             case 0:
                 return;
