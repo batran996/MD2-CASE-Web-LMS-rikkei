@@ -97,7 +97,7 @@ public class ViewMainMenu {
         while (true) {
             System.out.println("Enter name");
             name = Config.scanner().nextLine();
-            if (name.matches("[a-zA-Z\\d]{1,10}")) {
+            if (name.matches("[a-z A-Z\\d]{1,100}")) {
                 break;
             } else {
                 System.out.println("Invalid name try again");
@@ -153,6 +153,7 @@ public class ViewMainMenu {
                 System.out.println("Register success!");
                 break;
         }
+//        fromRegister();
     }
 
     private void FromShowListUser() {
