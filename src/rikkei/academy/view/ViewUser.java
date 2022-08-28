@@ -2,6 +2,7 @@ package rikkei.academy.view;
 
 import rikkei.academy.config.Config;
 import rikkei.academy.controller.UserController;
+import rikkei.academy.model.RoleName;
 import rikkei.academy.model.User;
 
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ public class ViewUser {
             case 0:
                 return;
             case 1:
-//                System.out.println(new ViewMainMenu().userList);
                 fromShowUser();
                 break;
             case 2:
@@ -80,8 +80,12 @@ public class ViewUser {
             return;
         }
         User userDelete = new UserController().getUser(idDelete);
-        userController.deleteUser(idDelete,userDelete);
-        fromShowUser();
+        if (userDelete.getUserName().equalsIgnoreCase("ad")){
+            System.err.println("Không thể xóa tài khoản ADMIN");
+        }else {
+            userController.deleteUser(idDelete,userDelete);
 
+        }
+        fromShowUser();
     }
 }

@@ -2,6 +2,7 @@ package rikkei.academy.service.user;
 
 import rikkei.academy.config.Config;
 import rikkei.academy.model.KhoaHoc;
+import rikkei.academy.model.Role;
 import rikkei.academy.model.User;
 
 import java.util.ArrayList;

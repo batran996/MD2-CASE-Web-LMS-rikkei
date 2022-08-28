@@ -4,7 +4,9 @@ import rikkei.academy.config.Config;
 import rikkei.academy.model.KhoaHoc;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class KhoaHocServiceIMPL implements IKhoaHocService {
     static Config<List<KhoaHoc>> config = new Config<>();
@@ -14,10 +16,11 @@ public class KhoaHocServiceIMPL implements IKhoaHocService {
     static List<KhoaHoc> listYeuThich = config.read(PATH_KHOAHOCYEUTHICH);
 
     static {
-        if (listYeuThich == null){
+        if (listYeuThich == null) {
             listYeuThich = new ArrayList<>();
         }
     }
+
     private static List<KhoaHoc> khoaHocList = config.read(PATH_KHOAHOC);
 
     static {
@@ -60,7 +63,7 @@ public class KhoaHocServiceIMPL implements IKhoaHocService {
     public void delete(int id, KhoaHoc khoaHoc) {
         KhoaHoc khoaHocDelete = findByID(id);
         khoaHocList.remove(khoaHocDelete);
-        config.write(PATH_KHOAHOC,khoaHocList);
+        config.write(PATH_KHOAHOC, khoaHocList);
     }
 
 
@@ -72,7 +75,7 @@ public class KhoaHocServiceIMPL implements IKhoaHocService {
 
     @Override
     public List<KhoaHoc> listYeuThich() {
-        config.write(PATH_KHOAHOCYEUTHICH,listYeuThich);
+        config.write(PATH_KHOAHOCYEUTHICH, listYeuThich);
         return listYeuThich;
     }
 
@@ -80,7 +83,7 @@ public class KhoaHocServiceIMPL implements IKhoaHocService {
     public void deleteKhoaHocYeuthich(int iDelete, KhoaHoc khoaHocDelete) {
         KhoaHoc khoaHoc = getkhoaHocyeuThich(iDelete);
         listYeuThich.remove(khoaHoc);
-        config.write(PATH_KHOAHOCYEUTHICH,listYeuThich);
+        config.write(PATH_KHOAHOCYEUTHICH, listYeuThich);
     }
 
     @Override

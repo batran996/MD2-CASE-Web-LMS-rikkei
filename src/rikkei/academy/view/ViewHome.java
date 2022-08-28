@@ -52,11 +52,20 @@ public class ViewHome extends ViewMainMenu {
             case 3:
                new ViewbangDieuKhien().fromBangDieuKhien();
                break;
+            case 4:
+                fromThongTinCaNhan();
+                break;
             default:
                 System.out.println("Invalid choice");
 
         }
         menuUser();
+    }
+
+    private void fromThongTinCaNhan() {
+        System.out.println("thông tin cá nhân");
+        User userCaNhan = userController.getCurrentuser();
+        System.out.println(userCaNhan);
     }
 
     public void menuAdmin() {

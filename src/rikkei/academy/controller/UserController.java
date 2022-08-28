@@ -81,6 +81,10 @@ public class UserController {
     }
 
     public void deleteUser(int idDelete, User userDelete) {
+//        if (userDelete.getRoles(RoleName) == RoleName.ADMIN){
+//            System.err.println("Không thể xóa tài khoản ADMIN");
+//            return;
+//        }
         userService.delete(idDelete,userDelete);
     }
 }

@@ -2,6 +2,7 @@ package rikkei.academy.view;
 
 import rikkei.academy.config.Config;
 import rikkei.academy.controller.KhoaHocController;
+import rikkei.academy.controller.KhoaHocGanDayController;
 import rikkei.academy.model.KhoaHoc;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public class ViewKhoahocUser {
     KhoaHocController khoaHocController = new KhoaHocController();
     List<KhoaHoc> khoaHocControllerList = khoaHocController.getListKhoaHoc();
     List<KhoaHoc> khoaHocYeuThichController = khoaHocController.getListYeuThich();
+    KhoaHocGanDayController khoaHocGanDayController = new KhoaHocGanDayController();
+
 
     public void menuKhoaHoc() {
         System.out.println("Menu khóa học");
@@ -121,7 +124,6 @@ public class ViewKhoahocUser {
             }
         }
     }
-
     private void fromDanhSachKhoaHoc() {
         System.out.println("Danh sách khóa học");
         if (khoaHocControllerList == null) {
@@ -129,7 +131,28 @@ public class ViewKhoahocUser {
             return;
         }
         for (KhoaHoc khoahoc : khoaHocControllerList) {
-            System.out.println(khoahoc);
+            System.out.println( "ID" + khoahoc.getId()+" " + khoahoc.getNameKhoaHoc());
+        }
+        System.out.println("Chọn ID để xem chi tiết khóa học");
+        int id = -1;
+        try {
+            id = Integer.parseInt(Config.scanner().nextLine());
+
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid choice!");
+        }
+        boolean check = false;
+        for (int i = 0; i < khoaHocControllerList.size(); i++) {
+
+            if (khoaHocControllerList.get(i).getId() == id) {
+                check = true;
+                System.out.println(khoaHocControllerList.get(i));
+                khoaHocGanDayController.createKhoaHocGanDay(khoaHocControllerList.get(i));
+            }
+        }
+        if (!check) {
+            System.err.println("không tìm thấy id");
+            return;
         }
     }
 

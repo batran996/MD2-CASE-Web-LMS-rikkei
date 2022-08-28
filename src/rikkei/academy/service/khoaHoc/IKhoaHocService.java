@@ -14,4 +14,5 @@ public interface IKhoaHocService extends IGernericService<KhoaHoc> {
     void deleteKhoaHocYeuthich(int iDelete, KhoaHoc khoaHocDelete);
 
     KhoaHoc getkhoaHocyeuThich(int id);
+
 }

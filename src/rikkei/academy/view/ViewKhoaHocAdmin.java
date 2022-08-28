@@ -19,6 +19,7 @@ public class ViewKhoaHocAdmin {
     User currentUser = userController.getCurrentuser();
     RoleName roleName = new ArrayList<>(currentUser.getRoles()).get(0).getRoleName();
 public void khoaHocAdmin(){
+    System.out.println("0:back");
     System.out.println("1:Danh Sách khóa học");
     System.out.println("2:Thêm khóa học");
     System.out.println("3:Sửa khóa học");
@@ -31,6 +32,8 @@ public void khoaHocAdmin(){
         khoaHocAdmin();
     }
     switch (choice) {
+        case 0:
+            return;
         case 1:
             fromDanhSachKhoaHoc();
           break;

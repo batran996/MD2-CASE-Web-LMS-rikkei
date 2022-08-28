@@ -18,10 +18,10 @@ public class ViewMainMenu {
 
     public void menu() {
 
-        System.out.println("******MENU ĐĂNG KÝ ******");
-        System.out.println("1.Show user list");
-        System.out.println("2.Register");
-        System.out.println("3.Login");
+        System.out.println("******CHÀO MỪNG ĐẾN VỚI LMS ******");
+//        System.out.println("1.Show user list");
+        System.out.println("1.Register");
+        System.out.println("2.Login");
         int choice = -1;
         try {
             choice = Integer.parseInt(Config.scanner().nextLine());
@@ -29,17 +29,17 @@ public class ViewMainMenu {
             menu();
         }
         switch (choice) {
+//            case 1:
+//                FromShowListUser();
+//                break;
             case 1:
-                FromShowListUser();
-                break;
-            case 2:
                 fromRegister();
                 break;
-            case 3:
+            case 2:
                 fromLogin();
                 break;
             default:
-                System.out.println("Invalid choice");
+                System.err.println("Invalid choice");
         }
         menu();
 
@@ -137,8 +137,7 @@ public class ViewMainMenu {
             }
         }
         ///role
-        System.out.println("Enter role:");
-        String role = Config.scanner().nextLine();
+        String role = "user";
         Set<String> strRole = new HashSet<>();
         strRole.add(role);
         SignUpDTO signUpDTO = new SignUpDTO(id, name, userName, email, password, strRole);
