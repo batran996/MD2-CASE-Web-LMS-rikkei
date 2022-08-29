@@ -19,7 +19,6 @@ public class ViewMainMenu {
     public void menu() {
 
         System.out.println("******CHÀO MỪNG ĐẾN VỚI LMS ******");
-//        System.out.println("1.Show user list");
         System.out.println("1.Register");
         System.out.println("2.Login");
         int choice = -1;
@@ -51,7 +50,7 @@ public class ViewMainMenu {
         while (true) {
             System.out.println("Enter username");
             userName = Config.scanner().nextLine();
-            if (userName.matches("[a-zA-Z]{1,10}")) {
+            if (userName.matches("[a-zA-Z\\d]{1,10}")) {
                 break;
             } else {
                 System.out.println("Invalid username try again");
@@ -78,6 +77,9 @@ public class ViewMainMenu {
             case "login_failure":
                 System.out.println("login failer");
                 break;
+            case "blocked":
+                System.out.println("Tài khoản đã bị bock");
+                break;
         }
 
     }
@@ -97,7 +99,7 @@ public class ViewMainMenu {
         while (true) {
             System.out.println("Enter name");
             name = Config.scanner().nextLine();
-            if (name.matches("[a-z A-Z\\d]{1,100}")) {
+            if (name.matches("[a-z A-Z\\d]{1,40}")) {
                 break;
             } else {
                 System.out.println("Invalid name try again");
@@ -108,7 +110,7 @@ public class ViewMainMenu {
         while (true) {
             System.out.println("Enter username");
             userName = Config.scanner().nextLine();
-            if (userName.matches("[a-zA-Z\\d]{1,10}")) {
+            if (userName.matches("[a-zA-Z\\d]{1,30}")) {
                 break;
             } else {
                 System.out.println("Invalid username try again");
@@ -130,7 +132,7 @@ public class ViewMainMenu {
         while (true) {
             System.out.println("Enter password");
             password = Config.scanner().nextLine();
-            if (password.matches("[a-zA-Z\\d]{1,40}")) {
+            if (password.matches("[a-zA-Z\\d]{1,10}")) {
                 break;
             } else {
                 System.out.println("Invalid password try again");

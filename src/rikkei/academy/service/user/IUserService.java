@@ -1,5 +1,7 @@
 package rikkei.academy.service.user;
 
+import rikkei.academy.model.Role;
+import rikkei.academy.model.RoleName;
 import rikkei.academy.model.User;
 import rikkei.academy.service.IGernericService;
 
@@ -12,5 +14,13 @@ boolean existsByEmail(String email);
     User getCurrentUser();
     void saveCurrentUser(User user);
     User findByUserName(String username);
+
+    void changeUser(int idChange, User userChange, RoleName user);
+
+    void changeRole(int idChange, Role role);
+
+    void changPassword(int id, String password);
+
+    void changeStatus(int id);
 
 }

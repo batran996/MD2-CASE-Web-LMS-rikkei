@@ -3,10 +3,13 @@ package rikkei.academy.service.user;
 import rikkei.academy.config.Config;
 import rikkei.academy.model.KhoaHoc;
 import rikkei.academy.model.Role;
+import rikkei.academy.model.RoleName;
 import rikkei.academy.model.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UserServiceIMPL implements IUserService {
     static String PATH_USER = "C:\\Users\\WINDOWS\\IdeaProjects\\MD2-CASE-Web LMS rikkei\\src\\rikkei\\academy\\database\\user.txt";
@@ -37,7 +40,7 @@ public class UserServiceIMPL implements IUserService {
 
     @Override
     public User findByID(int id) {
-        for (User user: userList) {
+        for (User user : userList) {
             if (user.getId() == id) {
                 return user;
             }
@@ -55,7 +58,7 @@ public class UserServiceIMPL implements IUserService {
     public void delete(int id, User user) {
         User userDelete = findByID(id);
         userList.remove(userDelete);
-        config.write(PATH_USER,userList);
+        config.write(PATH_USER, userList);
     }
 
     @Override
@@ -112,5 +115,35 @@ public class UserServiceIMPL implements IUserService {
             }
         }
         return null;
+    }
+
+    @Override
+    public void changeUser(int id, User userChange, RoleName user) {
+        User userChanger = findByID(id);
+
+    }
+
+    @Override
+    public void changeRole(int idChange, Role role) {
+        User userChange = findByID(idChange);
+        Set<Role>setRole = new HashSet<>();
+        setRole.add(role);
+        userChange.setRoles(setRole);
+        config.write(PATH_USER,userList);
+    }
+
+    @Override
+    public void changPassword(int id, String password) {
+        User userChangePass = findByID(id);
+        userChangePass.setPassword(password);
+        config.write(PATH_USER,userList);
+
+    }
+
+    @Override
+    public void changeStatus(int id) {
+        User user = findByID(id);
+        user.setStatus(!user.isStatus());
+        config.write(PATH_USER,userList);
     }
 }

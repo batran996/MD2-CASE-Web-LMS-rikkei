@@ -11,7 +11,8 @@ public class RoleServiceIMPL implements IRoleService{
     public static List<Role> roleList = new ArrayList<>();
     static{
         roleList.add( new Role(1,RoleName.USER));
-        roleList.add(new Role(2,RoleName.ADMIN));
+        roleList.add(new Role(2,RoleName.COACH));
+        roleList.add(new Role(3,RoleName.ADMIN));
     }
     @Override
     ///hàm lấy list role

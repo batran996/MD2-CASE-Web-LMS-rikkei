@@ -11,6 +11,7 @@ import rikkei.academy.service.role.RoleServiceIMPL;
 import rikkei.academy.service.user.IUserService;
 import rikkei.academy.service.user.UserServiceIMPL;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -63,6 +64,9 @@ public class UserController {
             return new ResponseMessenger("login_failure");
         }
         User login = userService.findByUserName(signInDTO.getUserName());
+        if (login.isStatus()) {
+            return new ResponseMessenger("blocked");
+        }
         userService.saveCurrentUser(login);
         return new ResponseMessenger("login_success");
     }
@@ -70,21 +74,53 @@ public class UserController {
     public User getCurrentuser() {
         return userService.getCurrentUser();
     }
-    public void logout(){
+
+    public void logout() {
         userService.saveCurrentUser(null);
     }
 
 
-    public User getUser(int idDelete) {
-       return userService.findByID(idDelete);
+    public User getUser(int id) {
+        return userService.findByID(id);
 
     }
 
     public void deleteUser(int idDelete, User userDelete) {
-//        if (userDelete.getRoles(RoleName) == RoleName.ADMIN){
-//            System.err.println("Không thể xóa tài khoản ADMIN");
-//            return;
-//        }
-        userService.delete(idDelete,userDelete);
+        userService.delete(idDelete, userDelete);
+    }
+
+    public ResponseMessenger changeRole(int idChange, String roleName) {
+        if (userService.findByID(idChange) == null || idChange == 0) {
+            return new ResponseMessenger("not_found");
+        }
+        if (!roleName.equalsIgnoreCase("user") && !roleName.equalsIgnoreCase("coach")) {
+            return new ResponseMessenger("Invalid_role");
+        }
+        Role role = roleName.equalsIgnoreCase("user") ? roleService.findByRoleName(RoleName.USER) : roleService.findByRoleName(RoleName.COACH);
+        userService.changeRole(idChange, role);
+        return new ResponseMessenger("success!");
+    }
+
+    public void changePass(int id, String password) {
+        userService.changPassword(id, password);
+    }
+
+    public ResponseMessenger blockUser(int id) {
+        User blockUser = userService.findByID(id);
+        if (blockUser == null || id == 0) {
+            return new ResponseMessenger("not_found");
+        }
+        Role role = new ArrayList<>(getCurrentuser().getRoles()).get(0);
+        Role roleBlock = new ArrayList<>(blockUser.getRoles()).get(0);
+        if (role.getRoleName() == RoleName.COACH && (roleBlock.getRoleName() == RoleName.COACH || roleBlock.getRoleName() == RoleName.ADMIN)) {
+            return new ResponseMessenger("jurisdiction");
+        }
+        userService.changeStatus(id);
+        boolean check = blockUser.isStatus();
+        if (check) {
+            return new ResponseMessenger("blocked");
+        } else {
+            return new ResponseMessenger("unblocked");
+        }
     }
 }

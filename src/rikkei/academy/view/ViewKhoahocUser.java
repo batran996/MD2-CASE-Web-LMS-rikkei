@@ -133,7 +133,7 @@ public class ViewKhoahocUser {
         for (KhoaHoc khoahoc : khoaHocControllerList) {
             System.out.println( "ID" + khoahoc.getId()+" " + khoahoc.getNameKhoaHoc());
         }
-        System.out.println("Chọn ID để xem chi tiết khóa học");
+        System.out.println("Chọn ID  để xem chi tiết khóa học");
         int id = -1;
         try {
             id = Integer.parseInt(Config.scanner().nextLine());

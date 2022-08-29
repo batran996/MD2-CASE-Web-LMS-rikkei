@@ -26,7 +26,50 @@ public class ViewHome extends ViewMainMenu {
             case USER:
                 menuUser();
                 return;
+            case COACH:
+                menuCoach();
+                break;
         }
+    }
+
+    private void menuCoach() {
+        System.out.println(" hello COACH: " + currentUser.getUserName());
+        System.out.println("1:Logout");
+        System.out.println("2:Quản lý khóa học");
+        System.out.println("3:Quản lý bài tập");
+        System.out.println("4: Cá Nhân");
+        System.out.println("5:Quản lý user");
+        System.out.println("6:Quản lý lớp học");
+        int choice = -1;
+        try {
+            choice = Integer.parseInt(Config.scanner().nextLine());
+        } catch (Exception e) {
+            menuAdmin();
+        }
+        switch (choice) {
+            case 1:
+                userController.logout();
+                new ViewMainMenu().menu();
+                return;
+            case 2:
+                new ViewKhoaHocAdmin().khoaHocAdmin();
+                break;
+            case 3:
+                new ViewBaiTap().baiTapADmin();
+                break;
+            case 4:
+                fromThongTinCaNhan();
+                break;
+            case 5:
+                new ViewUserToCoach().fromUserManager();
+                break;
+            case 6:
+                new ClassroomManage().classroomMenu();
+                break;
+            default:
+                System.err.println("Invlaid choice!");
+        }
+        menuCoach();
     }
 
     public void menuUser() {
@@ -38,7 +81,7 @@ public class ViewHome extends ViewMainMenu {
         int choice = -1;
         try {
             choice = Integer.parseInt(Config.scanner().nextLine());
-        }catch (Exception e){
+        } catch (Exception e) {
             menuUser();
         }
         switch (choice) {
@@ -50,8 +93,8 @@ public class ViewHome extends ViewMainMenu {
                 new ViewKhoahocUser().menuKhoaHoc();
                 break;
             case 3:
-               new ViewbangDieuKhien().fromBangDieuKhien();
-               break;
+                new ViewbangDieuKhien().fromBangDieuKhien();
+                break;
             case 4:
                 fromThongTinCaNhan();
                 break;
@@ -66,6 +109,35 @@ public class ViewHome extends ViewMainMenu {
         System.out.println("thông tin cá nhân");
         User userCaNhan = userController.getCurrentuser();
         System.out.println(userCaNhan);
+        System.out.println("Enter 1 to change password");
+        System.out.println("Enter 0 to back menu");
+
+        int choice = -1;
+        try {
+            choice = Integer.parseInt(Config.scanner().nextLine());
+        } catch (Exception e) {
+            fromThongTinCaNhan();
+        }
+        switch (choice) {
+            case 0:
+                return;
+            case 1:
+                String password;
+                while (true) {
+                    System.out.println("Enter new password");
+                    password = Config.scanner().nextLine();
+                    if (password.matches("[a-zA-Z\\d]{1,10}")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid password try again");
+                    }
+                }
+                userController.changePass(userCaNhan.getId(), password);
+                System.out.println("change success");
+                break;
+            default:
+                System.err.println("Invalid choice!");
+        }
     }
 
     public void menuAdmin() {
@@ -74,12 +146,12 @@ public class ViewHome extends ViewMainMenu {
         System.out.println("2:Quản lý user");
         System.out.println("3:Quản lý khóa học");
         System.out.println("4:Quản lý bài tập");
-
-
+        System.out.println("5:Thông tin cá nhân");
+        System.out.println("6:Quản lý lớp học");
         int choice = -1;
         try {
             choice = Integer.parseInt(Config.scanner().nextLine());
-        }catch (Exception e){
+        } catch (Exception e) {
             menuAdmin();
         }
         switch (choice) {
@@ -88,13 +160,19 @@ public class ViewHome extends ViewMainMenu {
                 new ViewMainMenu().menu();
                 return;
             case 2:
-               new ViewUser().fromUserManager();
+                new ViewUser().fromUserManager();
                 break;
             case 3:
-               new ViewKhoaHocAdmin().khoaHocAdmin();
+                new ViewKhoaHocAdmin().khoaHocAdmin();
                 break;
             case 4:
                 new ViewBaiTap().baiTapADmin();
+                break;
+            case 5:
+                fromThongTinCaNhan();
+                break;
+            case 6:
+               new ClassroomManage().classroomMenu();
                 break;
             default:
                 System.err.println("Invlaid choice!");
