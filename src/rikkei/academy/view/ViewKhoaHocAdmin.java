@@ -173,7 +173,7 @@ public void khoaHocAdmin(){
         if (khoaHocControllerList.isEmpty()) {
             lastId = 1;
         } else {
-            lastId = khoaHocControllerList.get(khoaHocControllerList.size() - 1).getId();
+            lastId = khoaHocControllerList.get(khoaHocControllerList.size() - 1).getId()+1;
         }
         ///tạo khóa học mới cần truyền vào với id tăng 1 và tên+ lộ trình;
         System.out.println("nhập lộ trình khóa học");
@@ -191,7 +191,7 @@ public void khoaHocAdmin(){
                 return;
         }
 
-        KhoaHoc khoaHoc1 = new KhoaHoc(lastId + 1, name, loTrinh);
+        KhoaHoc khoaHoc1 = new KhoaHoc(lastId , name, loTrinh);
         khoaHocController.saveKhoaHoc(khoaHoc1);
         fromDanhSachKhoaHoc();
 

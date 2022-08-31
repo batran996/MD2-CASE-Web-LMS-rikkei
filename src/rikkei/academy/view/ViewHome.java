@@ -40,6 +40,8 @@ public class ViewHome extends ViewMainMenu {
         System.out.println("4: Cá Nhân");
         System.out.println("5:Quản lý user");
         System.out.println("6:Quản lý lớp học");
+        System.out.println("7:Quản lý học sinh");
+
         int choice = -1;
         try {
             choice = Integer.parseInt(Config.scanner().nextLine());
@@ -65,6 +67,9 @@ public class ViewHome extends ViewMainMenu {
                 break;
             case 6:
                 new ClassroomManage().classroomMenu();
+                break;
+            case 7:
+                new ViewStudent().menuStudent();
                 break;
             default:
                 System.err.println("Invlaid choice!");
@@ -148,6 +153,7 @@ public class ViewHome extends ViewMainMenu {
         System.out.println("4:Quản lý bài tập");
         System.out.println("5:Thông tin cá nhân");
         System.out.println("6:Quản lý lớp học");
+        System.out.println("7:Quản lý học sinh");
         int choice = -1;
         try {
             choice = Integer.parseInt(Config.scanner().nextLine());
@@ -173,6 +179,9 @@ public class ViewHome extends ViewMainMenu {
                 break;
             case 6:
                new ClassroomManage().classroomMenu();
+                break;
+            case 7:
+                new ViewStudent().menuStudent();
                 break;
             default:
                 System.err.println("Invlaid choice!");

@@ -1,24 +1,25 @@
 package rikkei.academy.model;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Student {
+public class Student  implements Serializable {
     int id;
     String name;
-    int phone;
+    String phone;
     String email;
     String address;
-    Date birt;
+    LocalDate birt;
     String gender;
     ClassRoom classRoom;
 
     public Student() {
     }
 
-    public Student(int id, String name, int phone, String email, String address, Date birt, String gender, ClassRoom classRoom) {
+    public Student(int id, String name, String phone, String email, String address, LocalDate birt, String gender, ClassRoom classRoom) {
         this.id = id;
         this.name = name;
-        this.phone = phone;
+        this.phone = String.valueOf(phone);
         this.email = email;
         this.address = address;
         this.birt = birt;
@@ -42,12 +43,12 @@ public class Student {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setPhone(String phone) {
+        this.phone = String.valueOf(phone);
     }
 
     public String getEmail() {
@@ -66,11 +67,11 @@ public class Student {
         this.address = address;
     }
 
-    public Date getBirt() {
+    public LocalDate getBirt() {
         return birt;
     }
 
-    public void setBirt(Date birt) {
+    public void setBirt(LocalDate birt) {
         this.birt = birt;
     }
 
